@@ -94,7 +94,7 @@
                   <field name="price" />
                   <field name="partner_id" />
                   <field name="status" />
-                  <button icon="fa-check" type="object" name="action_accept_offer" 
+                  <button icon="fa-check" type="object" name="action_accept_offer" invisible="status in ('accepted','refused')"
                     string="Accept offer"  />
 
                   <!--    invisible="state == 'sold'" invisible="property_id.state == 'sold'"
