@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<odoo>
+
+    <!-- First(root) level -->
+    <menuitem name="Real Estate" id="estate_menu_root" />
+    <!-- Second level -->
+    <menuitem name="Properties" id="estate_menu_propeties" parent="estate_menu_root" />
+    <menuitem name="Settings" id="estate_menu_settings" parent="estate_menu_root" />
+    <menuitem name="Offers" action="show_all_offers" id="estate_menu_ads" parent="estate_menu_root" />
+
+    <!-- Third level -->
+    <menuitem name="Properties list" action="show_estate_action" id="estate_menu_list"
+        parent="estate_menu_propeties" />
+
+
+    <menuitem name="Property types list" action="show_estate_type_action"
+        id="estate_type_menu_list" parent="estate_menu_settings" />
+
+
+    <menuitem name="Property tags list" action="show_estate_tag_action"
+        id="estate_tags_menu_list" parent="estate_menu_settings" />
+</odoo>

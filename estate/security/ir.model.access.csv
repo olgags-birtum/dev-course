@@ -1,4 +1,10 @@
 id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
-access_real_estate_user,access_real_estate_user,real.estate,base.group_user,1,0,0,0
-access_real_estate_admin,access_real_estate_admin,real.estate,estate.estate_manager,1,1,1,1
+access_real_estate_user, access_real_estate_user,model_real_estate,base.group_user,1,1,1,1
+access_real_estate_admin,access_real_estate_admin,model_real_estate,estate.estate_manager,1,1,1,1
+
+access_real_estate_type_user, access_real_estate_type_user,model_real_estate_type,base.group_user,1,1,1,1
+
+access_real_estate_tag_user, access_real_estate_tag_user,model_real_estate_tag,base.group_user,1,1,1,1
+
+access_real_estate_offer_user, access_real_estate_offer_user,model_real_estate_offer,base.group_user,1,1,1,1
 
