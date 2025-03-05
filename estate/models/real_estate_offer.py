@@ -13,6 +13,11 @@ class EstateOffer(models.Model):
     _description = "Offers made for estate"
      #_order = "property_name" 
 
+
+     
+    #_order = "sequence desc"
+    #sequence = fields.Integer(default=1)
+
     price = fields.Float()
     status = fields.Selection(
         [

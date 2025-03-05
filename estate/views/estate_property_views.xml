@@ -55,7 +55,7 @@
               <field name="date_availability" />
               <!-- To hide the fiend add invisible -->
               <!--  <field name="date_availability" invisible="1"/>-->
-              <field name="selling_price" />
+              <field name="selling_price"  readonly="1"/>
               <field name="expected_price" />
               <field name="living_area" />
               <field name="bedrooms" />
@@ -69,7 +69,7 @@
               <field name="garden" />
               <field name="garden_area" />
               <field name="property_type_id" />
-              <field name="buyer" />
+              <field name="buyer" readonly="1" />
 
             </group>
           </group>
@@ -90,23 +90,29 @@
           <notebook>
             <page name="offers" string="Offers">
               <field name="offer_ids">
-                <tree editable="bottom">
+                <tree editable="bottom" decoration-success="status == 'accepted'" decoration-danger="status == 'refused'">
                   <field name="price" />
                   <field name="partner_id" />
                   <field name="status" />
-                  <button icon="fa-check" type="object" name="action_accept_offer"
-                    string="Accept offer" />
+                  <button icon="fa-check" type="object" name="action_accept_offer" 
+                    string="Accept offer"  />
+
+                  <!--    invisible="state == 'sold'" invisible="property_id.state == 'sold'"
+                  Caused by: EvalError: Can not evaluate python expression: (bool(state == 'sold'))
+    Error: Name 'state' is not defined
+    EvalError: Can not evaluate python expression: (bool(state == 'sold'))
+    Error: Name 'state' is not defined-->
                 </tree>
               </field>
             </page>
 
             <page name="Other information" string="Other information">
               <group string="Other information">
-                <field name="garden_orientation" />
+                <field name="garden_orientation"  />
                 <field name="facades" />
-                <field name="garage" />
+                <field name="garage"  />
                 <field name="garden" />
-                <field name="garden_area" />
+                <field name="garden_area"  />
                 <field name="property_type_id" />
                 <field name="buyer" />
 
@@ -131,17 +137,17 @@
     <field name="arch" type="xml">
       <tree string="Estate Properties">
         <field name="name"></field>
-        <field name="garden_orientation" />
+        <field name="garden_orientation" optional ="true" />
         <field name="postcode" />
         <field name="date_availability" />
         <field name="selling_price" />
         <field name="bedrooms" />
         <field name="living_area" />
-        <field name="garden_area" />
+        <field name="garden_area" optional ="true" />
         <field name="total_area" />
-        <field name="facades" />
-        <field name="garage" />
-        <field name="garden" />
+        <field name="facades" optional ="true"/>
+        <field name="garage" optional ="true" />
+        <field name="garden" optional ="true" />
 
         <field name="property_type_id" />
         <!--   <field name="tag_ids" />

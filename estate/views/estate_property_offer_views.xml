@@ -13,6 +13,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="price" />
+                <field name="sequence" widget="handle"/>
                 <field name="status" />
                 <field name="partner_id" />
                 <field string="Property Name" name="property_id" />
