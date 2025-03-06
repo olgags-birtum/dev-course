@@ -25,7 +25,13 @@
         <field name="model">real.estate.tag</field>
         <field name="arch" type="xml">
             <form string="">
+
                 <sheet>
+                
+                    <div class="oe_button_box" string="Properties">
+                        <button name="action_open_property_ids" type="object" class="oe_stat_button"
+                            icon="fa-list"> Related properties  </button>
+                    </div>
                     <group>
                         <field name="name"></field>
                     </group>

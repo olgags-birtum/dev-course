@@ -17,6 +17,7 @@
         <field name="arch" type="xml">
             <tree string="">
                 <field name="name"></field>
+                <field name="offer_count"></field>
             </tree>
         </field>
     </record>
@@ -27,6 +28,21 @@
         <field name="arch" type="xml">
             <form string="">
                 <sheet>
+
+
+                    <div class="oe_button_box" string="Properties">
+                        <button name="action_open_property_ids" type="object" class="oe_stat_button"
+                            icon="fa-list"> Related properties (<field name="property_count"
+                                string="" widget="line_count" />) </button>
+                    </div>
+
+                                    
+                    <div class="oe_button_box" string="Offers">
+                        <button name="action_open_offer_ids" type="object" class="oe_stat_button"
+                            icon="fa-list"> Related offers (<field name="offer_count"
+                                string="" widget="line_count" />)  </button>
+                    </div>
+
                     <div class="oe_title">
                         <div class="oe_edit_only">
                             <label for="name"></label>
@@ -40,10 +56,13 @@
                             <field name="property_ids">
 
                                 <tree string="">
-                                  <!--   sin crear un tree dentro va a enseñar modelo con todos los campos -->
+                                    <!--   sin crear un tree dentro va a enseñar modelo con todos los
+                                    campos -->
                                     <field name="name"></field>
                                     <field name="expected_price"></field>
                                     <field name="state"></field>
+
+
                                 </tree>
                             </field>
                         </page>

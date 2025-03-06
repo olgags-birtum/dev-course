@@ -1,5 +1,5 @@
 import random
-from odoo import models, fields, api
+from odoo import _,models, fields, api
 
 
 class EstateTag(models.Model):
@@ -14,3 +14,13 @@ class EstateTag(models.Model):
     color=fields.Char()
 
   
+    def action_open_property_ids(self):
+            return {
+                "name": _("Related Properties"),
+                "type": "ir.actions.act_window",
+                "view_mode": "tree,form",
+                "res_model": "real.estate",
+                "target": "iframe",
+                "domain": [("tag_ids", "=", self.id)],# filter por tag id of the properties - should be equal to the currect tag id 
+                "context":  {"default_tag_ids": [(6, 0, [self.id])]},
+            }

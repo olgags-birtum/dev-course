@@ -11,10 +11,10 @@ class EstateOffer(models.Model):
 
     _name = "real.estate.offer"
     _description = "Offers made for estate"
-     #_order = "property_name" 
+    _order = "property_id" 
 
 
-     
+
     #_order = "sequence desc"
     #sequence = fields.Integer(default=1)
 
@@ -30,12 +30,15 @@ class EstateOffer(models.Model):
     )
     partner_id = fields.Many2one("res.partner", required=True, string="Buyer")
     property_id = fields.Many2one("real.estate", required=True)
+
+
      # store tru no funciona
      #psycopg2.errors.UndefinedColumn: column real_estate_offer.property_name does not exist
 #LINE 1: ...fer"."validity" FROM "real_estate_offer" ORDER BY "real_esta...
 
-     #property_name = fields.Char(related="property_id.name", store =True)
-    type_id = fields.Many2one(related="property_id.property_type_id")
+    property_name = fields.Char(related="property_id.name")
+    
+    type_id = fields.Many2one(related="property_id.property_type_id", store= "True")
     name = fields.Char(related="property_id.name")
     validity = fields.Integer(default=7)
 
