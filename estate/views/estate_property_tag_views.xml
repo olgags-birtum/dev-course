@@ -27,11 +27,11 @@
             <form string="">
 
                 <sheet>
-                
+                <div class="d-flex justify-content-center">
                     <div class="oe_button_box" string="Properties">
-                        <button name="action_open_property_ids" type="object" class="oe_stat_button"
+                        <button name="action_open_property_ids" type="object" class="oe_stat_button  btn-lg"
                             icon="fa-list"> Related properties  </button>
-                    </div>
+                    </div></div>
                     <group>
                         <field name="name"></field>
                     </group>
