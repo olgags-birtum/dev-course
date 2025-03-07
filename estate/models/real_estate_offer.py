@@ -11,12 +11,10 @@ class EstateOffer(models.Model):
 
     _name = "real.estate.offer"
     _description = "Offers made for estate"
-    _order = "property_id" 
+    _order = "property_id"
 
-
-
-    #_order = "sequence desc"
-    #sequence = fields.Integer(default=1)
+    # _order = "sequence desc"
+    # sequence = fields.Integer(default=1)
 
     price = fields.Float()
     status = fields.Selection(
@@ -31,14 +29,13 @@ class EstateOffer(models.Model):
     partner_id = fields.Many2one("res.partner", required=True, string="Buyer")
     property_id = fields.Many2one("real.estate", required=True)
 
-
-     # store tru no funciona
-     #psycopg2.errors.UndefinedColumn: column real_estate_offer.property_name does not exist
-#LINE 1: ...fer"."validity" FROM "real_estate_offer" ORDER BY "real_esta...
+    # store tru no funciona
+    # psycopg2.errors.UndefinedColumn: column real_estate_offer.property_name does not exist
+    # LINE 1: ...fer"."validity" FROM "real_estate_offer" ORDER BY "real_esta...
 
     property_name = fields.Char(related="property_id.name")
-    
-    type_id = fields.Many2one(related="property_id.property_type_id", store= "True")
+
+    type_id = fields.Many2one(related="property_id.property_type_id", store="True")
     name = fields.Char(related="property_id.name")
     validity = fields.Integer(default=7)
 
@@ -65,22 +62,43 @@ class EstateOffer(models.Model):
         if self.property_id.state == "sold":
 
             raise UserError(_("The property has already been sold"))
-        if "accepted" in self.property_id.offer_ids.mapped("status"): 
+        if "accepted" in self.property_id.offer_ids.mapped("status"):
             raise UserError(_("One offer has been already accepted"))
         if self.status == "refused":
             raise UserError(_("Offer has been already refused"))
         if self.price < self.property_id.expected_price * 0.9:
-            self.status = "refused"  
+            self.status = "refused"
             raise ValidationError(
                 _("The selling price cannot be lower than 90% of the expected price")
             )
         self.status = "accepted"
         self.property_id.selling_price = self.price
         self.property_id.state = "sold"
-        self.property_id.buyer = self.partner_id # no funciona
+        self.property_id.buyer = self.partner_id  # no funciona
 
     def action_refuse_offer(self):
         self.ensure_one()
         if self.status == "refused":
             raise UserError(_("Offer has been already refused"))
         self.status = "refused"
+
+    @api.model
+    def create(self, vals):
+        property_id = vals.get("property_id")
+        if property_id:
+            property = self.env["real.estate"].browse(property_id)
+
+            if property.state == "sold":
+                raise UserError(_("You cannot make an offer on a sold property"))
+
+            property.state = "received"
+
+            return super().create(vals)
+        # do i need to return a model and self?
+        #like in the example
+        
+#
+    #@api.model #is obligatorio
+ #   def create(self, vals):
+   #     self.env['gamification.badge'].browse(vals['badge_id']).check_granting()
+  #      return super(BadgeUser, self).create(vals)

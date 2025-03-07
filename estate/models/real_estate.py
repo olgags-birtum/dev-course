@@ -4,7 +4,7 @@ from odoo import _, models, fields, api
 from dateutil.relativedelta import relativedelta
 import odoo.fields as odoo_fields
 from odoo.exceptions import ValidationError
-
+from odoo.exceptions import UserError
 
 class Estate(models.Model):
 
@@ -133,3 +133,10 @@ class Estate(models.Model):
         for property in self:
             offer = property.offer_ids[0]
             offer.action_accept_offer()
+
+
+    def unlink(self):
+        for property in self:
+            if property.state == 'sold':
+                raise UserError(_("You cannot delete a sold property"))
+        return super().unlink()
